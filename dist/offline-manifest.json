@@ -2,12 +2,22 @@
   "format": 1,
   "appId": "ls-majong",
   "version": "1.0.0",
-  "buildId": "1.0.0-f62bf614e51e8d84",
+  "buildId": "1.0.0-421c82194862d686",
   "core": [
     {
       "path": "/assets/garden.svg",
       "sha256": "130a1c90aba5682fd7abe7810cf3095743f2a3d9f03a73fb985347e791a0dc5b",
       "bytes": 2965
+    },
+    {
+      "path": "/assets/sounds/tile-clack.m4a",
+      "sha256": "fa8faa7af699654de4ffe4d88209bf93a076948bc13e10eb5581958a77283933",
+      "bytes": 4066
+    },
+    {
+      "path": "/assets/sounds/tile-touch.m4a",
+      "sha256": "10e7cc804f2be3efff13bb0fd38a9b5140fc128a2b9c8ee9c31039750d87ad3c",
+      "bytes": 2889
     },
     {
       "path": "/assets/tiles/Back.svg",
@@ -231,7 +241,7 @@
     },
     {
       "path": "/build-info.json",
-      "sha256": "8c717d4b7b7b274d9792f141522870d7ef17c3c0b5440e13686d0d5341581464",
+      "sha256": "30b88a98419100a4a32d85d2ad3c30e9f0fa79194e4b8e0966cfb7d6acff615e",
       "bytes": 87
     },
     {
@@ -281,8 +291,8 @@
     },
     {
       "path": "/",
-      "sha256": "d1a58abc0e5784c9b2da414aea1863b45f0599449b1025ac48ede59fdab881fb",
-      "bytes": 3012
+      "sha256": "23688fd1bf12590fd0a9bb06d8aae3e4a8a49acd1467cea5dd7bae6c6d928eb6",
+      "bytes": 2964
     },
     {
       "path": "/manifest.webmanifest",
@@ -291,8 +301,8 @@
     },
     {
       "path": "/src/app.js",
-      "sha256": "f452d63cd4bbf94e320b5d45bc321e5062a59ed839486d9922dce176780ca8d4",
-      "bytes": 22521
+      "sha256": "97c8075e92868aa1ce43a5646f25c97d6a6dd77af7c319ba7e984a4fe4fcd5f9",
+      "bytes": 23361
     },
     {
       "path": "/src/engine.js",
@@ -303,11 +313,6 @@
       "path": "/src/interaction.js",
       "sha256": "15279bfee893498a42c1980a039f23525a96b27fc641fe61cbba350ff42f51a2",
       "bytes": 2522
-    },
-    {
-      "path": "/src/ios-guard-early.js",
-      "sha256": "478dccba9e2f5c63c09d3f51e4aacb5cf228f314fe567a3a266b455a311a3cd1",
-      "bytes": 1383
     },
     {
       "path": "/src/offline.js",
@@ -321,8 +326,8 @@
     },
     {
       "path": "/styles/game.css",
-      "sha256": "af117bcbeaad1b9c3431c7b316442c385fbce804d6526fcdfa6b47019b03f688",
-      "bytes": 11770
+      "sha256": "eb9f467a5607f3eaad152467b1d653106774cd7e289eea368a74f121f4a56e6b",
+      "bytes": 11490
     }
   ],
   "media": []

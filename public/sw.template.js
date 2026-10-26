@@ -51,6 +51,7 @@ function mimeOkay(file, response) {
   if (/\.(json|webmanifest)$/.test(file.path)) return /json|manifest/.test(type);
   if (/\.svg$/.test(file.path)) return type.includes('svg');
   if (/\.(png|webp|jpg|jpeg)$/.test(file.path)) return type.startsWith('image/');
+  if (/\.(m4a|ogg|mp3)$/.test(file.path)) return type.startsWith('audio/');
   return true;
 }
 async function verified(file) {
