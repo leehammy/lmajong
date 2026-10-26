@@ -28,7 +28,7 @@ function quiet(){musicEl?.pause();if(!audioCtx)return;sfxGain.gain.value=0;music
 function wake(){if(!audioCtx)return;audioCtx.resume().catch(()=>{});volumes();music();}
 function play(name,gain=1,at=0,rate=1){const ctx=audio(),buf=sounds[name];if(!ctx||!buf)return;const src=ctx.createBufferSource(),vol=ctx.createGain();src.buffer=buf;src.playbackRate.value=rate;vol.gain.value=gain;src.connect(vol).connect(sfxGain);src.start(ctx.currentTime+at);}
 function sfx(cue){if(!opt('sound'))return;const ctx=audio();if(!ctx)return;ctx.resume().catch(()=>{});const r=()=>.96+Math.random()*.08,clack=()=>`match-${1+Math.floor(Math.random()*4)}`;if(cue==='select')play('select',1.6,0,r());else if(cue==='match')play(clack(),.8,0,r());else if(cue==='shuffle')play('shuffle',.7);else if(cue==='win')for(let i=0;i<4;i++)play(clack(),.6,.1+i*.28,r());}
-function levelFor(n){if(n<=levels.length)return levels[n-1];const choices=layouts.filter(l=>l.positions.length>=72&&l.positions.length<=144);const layout=choices[(n-levels.length-1)%choices.length];const seed=(Math.imul(n,2654435761)^0x6d2b79f5)>>>0;return {id:n,layoutId:layout.id,seed,difficulty:3,...generateDeal(layout,seed,3)};}
+function levelFor(n){if(n<=levels.length)return levels[n-1];const choices=layouts.filter(l=>l.positions.length>=72&&l.positions.length<=144&&l.layers>=2);const layout=choices[(n-levels.length-1)%choices.length];const seed=(Math.imul(n,2654435761)^0x6d2b79f5)>>>0;return {id:n,layoutId:layout.id,seed,difficulty:3,...generateDeal(layout,seed,3)};}
 // Daily puzzle: one random board per local date, in its own save slot so the Journey board is untouched.
 const isDaily=()=>save.mode==='daily'&&!!save.daily?.game;
 const board=()=>isDaily()?save.daily.game:save.game;

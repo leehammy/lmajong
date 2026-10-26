@@ -4,6 +4,7 @@ import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { proveGeometry, isFreeAmong } from '../src/engine.js';
+import { OPENING_BOARDS, openingPositions } from './opening-boards.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const vendor = path.join(root, 'vendor/layout-sources');
 const out = path.join(root, 'data');
@@ -63,6 +64,7 @@ for(const file of fs.readdirSync(path.join(vendor,'green-mahjong')).filter(f=>f.
 // 1. Crafted shapes: a footprint mask stacked into a pyramid, each layer keeping the cells whose four
 //    neighbours exist below it.
 // 2. "Little" boards: the centre of each large donor layout, cropped to a window, keeping its own layers.
+OPENING_BOARDS.forEach(([name,blocks],i)=>add(`opening-${String(i+1).padStart(2,'0')}`,name,openingPositions(blocks),'L’s Majong opening boards (scripts/opening-boards.mjs)','GPL-3.0-only','L’s Majong contributors'));
 const key2=(x,y)=>x+','+y;
 function stack(mask,maxLayers) {
   const positions=[];let layer=new Set(mask.map(([x,y])=>key2(x,y)));

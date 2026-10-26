@@ -10,10 +10,12 @@ const levels=[], seen=new Set();
 let lastLayout='', cycles=new Map();
 const fit=(min,max,minLayers,maxLayers,from=layouts)=>from.filter(l=>l.tileCount>=min&&l.tileCount<=max&&l.layers>=minLayers&&l.layers<=maxLayers);
 // Full donor boards; the derived "Little" crops and crafted shapes serve the opening and the breathers.
-const classic=layouts.filter(l=>!l.id.includes('-little-')&&!l.id.startsWith('garden-'));
+const classic=layouts.filter(l=>!l.id.includes('-little-')&&!l.id.startsWith('garden-')&&!l.id.startsWith('opening-'));
+// Levels 1–16 are the hand-designed opening boards in order; the bands continue from there.
+const openings=layouts.filter(l=>l.id.startsWith('opening-')).sort((a,b)=>a.id.localeCompare(b.id));
 const BANDS=[
-  {from:2,to:5,pool:fit(30,44,2,3)},{from:6,to:15,pool:fit(36,60,2,4)},{from:16,to:30,pool:fit(48,76,2,4)},
-  {from:31,to:60,pool:fit(60,96,3,5)},{from:61,to:100,pool:fit(76,120,3,6)},{from:101,to:150,pool:fit(96,144,2,9,classic)}];
+  {from:17,to:30,pool:fit(60,90,3,6)},{from:31,to:60,pool:fit(60,96,3,5)},{from:61,to:100,pool:fit(76,120,3,6)},
+  {from:101,to:150,pool:fit(96,144,2,9,classic)}];
 // One board per level from evenly spaced complexity buckets, chosen within the bucket by seed.
 function bandPick(band,id) {
   if(!band.picks) {
@@ -23,12 +25,12 @@ function bandPick(band,id) {
   return band.picks[id-band.from];
 }
 for(let id=1;id<=COUNT;id++) {
-  // The opening Journey climbs through size bands; within each band boards are taken in order of
+  // After the opening boards the Journey climbs through size bands; within each band boards are taken in order of
   // complexity so every level is a little bigger or deeper than the last. From level 151 the whole
   // library cycles, with a smaller layered breather every sixth level.
   let layout;
   const band=BANDS.find(b=>id>=b.from&&id<=b.to);
-  if(id===1) layout=layouts.find(l=>l.id==='intro-1');
+  if(id<=openings.length) layout=openings[id-1];
   else if(band) layout=bandPick(band,id);
   else {
     const pool=id%6===0?fit(40,80,2,9):fit(84,144,1,9,classic);
