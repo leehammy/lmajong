@@ -1,0 +1,367 @@
+{
+  "date": "2026-10-26",
+  "buildId": "1.0.0-1e0f442813ba9db6",
+  "browser": "156.0.8078.47",
+  "cases": [
+    {
+      "name": "Desktop startup and atomic complete offline install",
+      "passed": true,
+      "milliseconds": 994,
+      "detail": {
+        "ready": true,
+        "coreHave": 64,
+        "coreTotal": 64,
+        "mediaHave": 0,
+        "mediaTotal": 0,
+        "buildId": "1.0.0-1e0f442813ba9db6",
+        "version": "1.0.0",
+        "missing": []
+      }
+    },
+    {
+      "name": "Blocked tile, mismatches, match, undo, hint and reshuffle are free",
+      "passed": true,
+      "milliseconds": 614,
+      "detail": {
+        "blocked": true,
+        "mismatch": true,
+        "coins": 0
+      }
+    },
+    {
+      "name": "Complete entire level through rendered tiles; reward and unlock once",
+      "passed": true,
+      "milliseconds": 6384,
+      "detail": {
+        "pairsCompleted": 12,
+        "unlocked": 2
+      }
+    },
+    {
+      "name": "Export backup, buy cosmetic with earned coins and restore complete progress",
+      "passed": true,
+      "milliseconds": 383,
+      "detail": {
+        "exportedBytes": 7730,
+        "coinsRestored": 25,
+        "deviceDownload": "canceled"
+      }
+    },
+    {
+      "name": "Corrupt backup fails without changing progress",
+      "passed": true,
+      "milliseconds": 41
+    },
+    {
+      "name": "Offline new-tab relaunch preserves the saved board",
+      "passed": true,
+      "milliseconds": 1250
+    },
+    {
+      "name": "Fake-online black-hole startup, bounded update and cooldown",
+      "passed": true,
+      "milliseconds": 3556,
+      "detail": {
+        "startupMs": 481,
+        "probeMs": 3017,
+        "newProbes": 1,
+        "cooldownProbes": 0
+      }
+    },
+    {
+      "name": "Broken HTML-as-script update is rejected atomically; old game remains playable",
+      "passed": true,
+      "milliseconds": 181
+    },
+    {
+      "name": "Verified update waits for user action and preserves saves; old tab keeps old assets",
+      "passed": true,
+      "milliseconds": 4329
+    },
+    {
+      "name": "iPad and iPhone responsive layouts, touch gestures and protected interaction",
+      "passed": true,
+      "milliseconds": 2979,
+      "detail": [
+        {
+          "name": "ipad-landscape",
+          "width": 1180,
+          "height": 820,
+          "geometry": {
+            "overflow": false,
+            "controls": [
+              {
+                "id": "settings-button",
+                "x": 1104,
+                "y": 21.5,
+                "w": 48,
+                "h": 48,
+                "inViewport": true
+              },
+              {
+                "id": "journey-button",
+                "x": 940.671875,
+                "y": 126.390625,
+                "w": 201.328125,
+                "h": 69,
+                "inViewport": true
+              },
+              {
+                "id": "hint-button",
+                "x": 309.5,
+                "y": 684,
+                "w": 177,
+                "h": 66,
+                "inViewport": true
+              },
+              {
+                "id": "undo-button",
+                "x": 501.5,
+                "y": 684,
+                "w": 177,
+                "h": 66,
+                "inViewport": true
+              },
+              {
+                "id": "shuffle-button",
+                "x": 693.5,
+                "y": 684,
+                "w": 177,
+                "h": 66,
+                "inViewport": true
+              },
+              {
+                "id": "garden-button",
+                "x": 28,
+                "y": 766,
+                "w": 98.046875,
+                "h": 44,
+                "inViewport": true
+              },
+              {
+                "id": "help-button",
+                "x": 1052.984375,
+                "y": 766,
+                "w": 99.015625,
+                "h": 44,
+                "inViewport": true
+              }
+            ]
+          },
+          "guards": [
+            {
+              "type": "selectstart",
+              "blocked": true
+            },
+            {
+              "type": "contextmenu",
+              "blocked": true
+            },
+            {
+              "type": "dragstart",
+              "blocked": true
+            },
+            {
+              "type": "dblclick",
+              "blocked": true
+            }
+          ],
+          "denseLevel": 121,
+          "denseTiles": 144,
+          "denseFits": true
+        },
+        {
+          "name": "iphone-portrait",
+          "width": 390,
+          "height": 844,
+          "geometry": {
+            "overflow": false,
+            "controls": [
+              {
+                "id": "settings-button",
+                "x": 334,
+                "y": 14,
+                "w": 44,
+                "h": 48,
+                "inViewport": true
+              },
+              {
+                "id": "journey-button",
+                "x": 281.984375,
+                "y": 104.9375,
+                "w": 92.015625,
+                "h": 56,
+                "inViewport": true
+              },
+              {
+                "id": "hint-button",
+                "x": 12,
+                "y": 717,
+                "w": 116.65625,
+                "h": 66,
+                "inViewport": true
+              },
+              {
+                "id": "undo-button",
+                "x": 136.65625,
+                "y": 717,
+                "w": 116.671875,
+                "h": 66,
+                "inViewport": true
+              },
+              {
+                "id": "shuffle-button",
+                "x": 261.328125,
+                "y": 717,
+                "w": 116.671875,
+                "h": 66,
+                "inViewport": true
+              },
+              {
+                "id": "garden-button",
+                "x": 12,
+                "y": 796,
+                "w": 79.546875,
+                "h": 44,
+                "inViewport": true
+              },
+              {
+                "id": "help-button",
+                "x": 297.5625,
+                "y": 796,
+                "w": 80.4375,
+                "h": 44,
+                "inViewport": true
+              }
+            ]
+          },
+          "guards": [
+            {
+              "type": "selectstart",
+              "blocked": true
+            },
+            {
+              "type": "contextmenu",
+              "blocked": true
+            },
+            {
+              "type": "dragstart",
+              "blocked": true
+            },
+            {
+              "type": "dblclick",
+              "blocked": true
+            }
+          ],
+          "denseLevel": 121,
+          "denseTiles": 144,
+          "denseFits": true
+        },
+        {
+          "name": "iphone-landscape",
+          "width": 844,
+          "height": 390,
+          "geometry": {
+            "overflow": false,
+            "controls": [
+              {
+                "id": "settings-button",
+                "x": 782,
+                "y": 0.5,
+                "w": 48,
+                "h": 48,
+                "inViewport": true
+              },
+              {
+                "id": "journey-button",
+                "x": 539.734375,
+                "y": 57,
+                "w": 139.265625,
+                "h": 44,
+                "inViewport": true
+              },
+              {
+                "id": "hint-button",
+                "x": 700,
+                "y": 57,
+                "w": 130,
+                "h": 88.328125,
+                "inViewport": true
+              },
+              {
+                "id": "undo-button",
+                "x": 700,
+                "y": 153.328125,
+                "w": 130,
+                "h": 88.34375,
+                "inViewport": true
+              },
+              {
+                "id": "shuffle-button",
+                "x": 700,
+                "y": 249.671875,
+                "w": 130,
+                "h": 88.328125,
+                "inViewport": true
+              },
+              {
+                "id": "garden-button",
+                "x": 700,
+                "y": 346,
+                "w": 64,
+                "h": 44,
+                "inViewport": true
+              },
+              {
+                "id": "help-button",
+                "x": 766,
+                "y": 346,
+                "w": 64,
+                "h": 44,
+                "inViewport": true
+              }
+            ]
+          },
+          "guards": [
+            {
+              "type": "selectstart",
+              "blocked": true
+            },
+            {
+              "type": "contextmenu",
+              "blocked": true
+            },
+            {
+              "type": "dragstart",
+              "blocked": true
+            },
+            {
+              "type": "dblclick",
+              "blocked": true
+            }
+          ],
+          "denseLevel": 121,
+          "denseTiles": 144,
+          "denseFits": true
+        }
+      ]
+    },
+    {
+      "name": "No external runtime dependencies or uncaught application errors",
+      "passed": true,
+      "milliseconds": 0,
+      "detail": {
+        "requests": 532,
+        "external": 0,
+        "pageErrors": 0
+      }
+    }
+  ],
+  "errors": [],
+  "limitations": [
+    "Chromium viewport and CDP touch emulation do not verify physical Safari/iOS installed PWA behaviour.",
+    "Browser data eviction, real device storage quota exhaustion and actual Vercel deployment remain manual checks.",
+    "The execution environment cancels even minimal Blob downloads. The exact UI-generated backup Blob was inspected and restored, but saving a download to the device is unverified."
+  ],
+  "passed": true
+}

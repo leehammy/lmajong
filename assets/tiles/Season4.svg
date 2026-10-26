@@ -1,0 +1,7 @@
+<svg id="Season4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid meet">
+  <g transform="translate(150,200)">
+    <rect x="-100" y="-130" width="200" height="190" rx="16" fill="none" stroke="#37474f" stroke-width="8"/>
+    <text x="0" y="30" text-anchor="middle" font-family="Georgia, serif" font-size="170" font-weight="bold" fill="#37474f">Wi</text>
+    <text x="0" y="148" text-anchor="middle" font-family="Georgia, serif" font-size="64" font-weight="bold" fill="#37474f">4</text>
+  </g>
+</svg>

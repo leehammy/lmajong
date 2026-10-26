@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-26",
+  "results": [
+    {
+      "name": "Unrecoverable saves stay intact and quarantined; startup tools are safe",
+      "passed": true
+    },
+    {
+      "name": "Emergency export contains original raw recovery data",
+      "passed": true
+    },
+    {
+      "name": "Restore from recovery returns to normal board layout and offline initialization",
+      "passed": true
+    },
+    {
+      "name": "Quota denial stays playable and visibly refuses to claim a save",
+      "passed": true
+    },
+    {
+      "name": "A damaged primary resumes the previous good board",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "limitations": [
+    "Actual OS download saving is not covered; the precise UI-generated Blob bytes are inspected.",
+    "Physical Safari/iOS remains unverified."
+  ]
+}

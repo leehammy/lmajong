@@ -1,0 +1,334 @@
+{
+  "version": "1.0.0",
+  "validated": true,
+  "levels": 5200,
+  "uniqueDealsIncludingReflections": 5200,
+  "uniqueLayoutsIncludingReflections": 296,
+  "layoutsUsed": 296,
+  "tilesReplayed": 665598,
+  "tests": [
+    "Every stored winning sequence replayed against original free/match rules",
+    "Every stored winning sequence replayed through gameplay API",
+    "Every tile matching group has even parity",
+    "No same-layer overlap or unsupported upper tiles",
+    "All layouts unique up to translation/reflection/rotation",
+    "All boards unique including eight planar transforms",
+    "Opening tile/layer limits checked",
+    "100 deterministic reproduction samples checked"
+  ],
+  "curve": [
+    {
+      "from": 1,
+      "to": 100,
+      "meanTiles": 57.08,
+      "meanGeometryComplexity": 6.08
+    },
+    {
+      "from": 101,
+      "to": 200,
+      "meanTiles": 122.7,
+      "meanGeometryComplexity": 16.72
+    },
+    {
+      "from": 201,
+      "to": 300,
+      "meanTiles": 132.7,
+      "meanGeometryComplexity": 18.33
+    },
+    {
+      "from": 301,
+      "to": 400,
+      "meanTiles": 127.84,
+      "meanGeometryComplexity": 17.93
+    },
+    {
+      "from": 401,
+      "to": 500,
+      "meanTiles": 130.14,
+      "meanGeometryComplexity": 19.61
+    },
+    {
+      "from": 501,
+      "to": 600,
+      "meanTiles": 130.76,
+      "meanGeometryComplexity": 18.75
+    },
+    {
+      "from": 601,
+      "to": 700,
+      "meanTiles": 130.68,
+      "meanGeometryComplexity": 18.5
+    },
+    {
+      "from": 701,
+      "to": 800,
+      "meanTiles": 127.62,
+      "meanGeometryComplexity": 19.02
+    },
+    {
+      "from": 801,
+      "to": 900,
+      "meanTiles": 129.98,
+      "meanGeometryComplexity": 18.57
+    },
+    {
+      "from": 901,
+      "to": 1000,
+      "meanTiles": 130.44,
+      "meanGeometryComplexity": 18.68
+    },
+    {
+      "from": 1001,
+      "to": 1100,
+      "meanTiles": 130.42,
+      "meanGeometryComplexity": 19.27
+    },
+    {
+      "from": 1101,
+      "to": 1200,
+      "meanTiles": 130.66,
+      "meanGeometryComplexity": 18.38
+    },
+    {
+      "from": 1201,
+      "to": 1300,
+      "meanTiles": 128.68,
+      "meanGeometryComplexity": 18.97
+    },
+    {
+      "from": 1301,
+      "to": 1400,
+      "meanTiles": 129.86,
+      "meanGeometryComplexity": 18.59
+    },
+    {
+      "from": 1401,
+      "to": 1500,
+      "meanTiles": 126.14,
+      "meanGeometryComplexity": 18.52
+    },
+    {
+      "from": 1501,
+      "to": 1600,
+      "meanTiles": 129.98,
+      "meanGeometryComplexity": 18.08
+    },
+    {
+      "from": 1601,
+      "to": 1700,
+      "meanTiles": 131.52,
+      "meanGeometryComplexity": 18.88
+    },
+    {
+      "from": 1701,
+      "to": 1800,
+      "meanTiles": 126.26,
+      "meanGeometryComplexity": 18.52
+    },
+    {
+      "from": 1801,
+      "to": 1900,
+      "meanTiles": 131.34,
+      "meanGeometryComplexity": 18.82
+    },
+    {
+      "from": 1901,
+      "to": 2000,
+      "meanTiles": 127.48,
+      "meanGeometryComplexity": 18.07
+    },
+    {
+      "from": 2001,
+      "to": 2100,
+      "meanTiles": 129.76,
+      "meanGeometryComplexity": 19.05
+    },
+    {
+      "from": 2101,
+      "to": 2200,
+      "meanTiles": 131.44,
+      "meanGeometryComplexity": 18.97
+    },
+    {
+      "from": 2201,
+      "to": 2300,
+      "meanTiles": 127.14,
+      "meanGeometryComplexity": 18.87
+    },
+    {
+      "from": 2301,
+      "to": 2400,
+      "meanTiles": 131.42,
+      "meanGeometryComplexity": 18.61
+    },
+    {
+      "from": 2401,
+      "to": 2500,
+      "meanTiles": 129.72,
+      "meanGeometryComplexity": 18.24
+    },
+    {
+      "from": 2501,
+      "to": 2600,
+      "meanTiles": 128.1,
+      "meanGeometryComplexity": 18.82
+    },
+    {
+      "from": 2601,
+      "to": 2700,
+      "meanTiles": 129.1,
+      "meanGeometryComplexity": 18.96
+    },
+    {
+      "from": 2701,
+      "to": 2800,
+      "meanTiles": 129.1,
+      "meanGeometryComplexity": 18.03
+    },
+    {
+      "from": 2801,
+      "to": 2900,
+      "meanTiles": 131.1,
+      "meanGeometryComplexity": 19.19
+    },
+    {
+      "from": 2901,
+      "to": 3000,
+      "meanTiles": 132.12,
+      "meanGeometryComplexity": 19.2
+    },
+    {
+      "from": 3001,
+      "to": 3100,
+      "meanTiles": 127.82,
+      "meanGeometryComplexity": 18.18
+    },
+    {
+      "from": 3101,
+      "to": 3200,
+      "meanTiles": 127.98,
+      "meanGeometryComplexity": 18.42
+    },
+    {
+      "from": 3201,
+      "to": 3300,
+      "meanTiles": 129.92,
+      "meanGeometryComplexity": 18.39
+    },
+    {
+      "from": 3301,
+      "to": 3400,
+      "meanTiles": 132.16,
+      "meanGeometryComplexity": 19.64
+    },
+    {
+      "from": 3401,
+      "to": 3500,
+      "meanTiles": 128.98,
+      "meanGeometryComplexity": 18.21
+    },
+    {
+      "from": 3501,
+      "to": 3600,
+      "meanTiles": 125.28,
+      "meanGeometryComplexity": 18.31
+    },
+    {
+      "from": 3601,
+      "to": 3700,
+      "meanTiles": 130.74,
+      "meanGeometryComplexity": 18.99
+    },
+    {
+      "from": 3701,
+      "to": 3800,
+      "meanTiles": 128.4,
+      "meanGeometryComplexity": 18.28
+    },
+    {
+      "from": 3801,
+      "to": 3900,
+      "meanTiles": 131.6,
+      "meanGeometryComplexity": 18.71
+    },
+    {
+      "from": 3901,
+      "to": 4000,
+      "meanTiles": 124.94,
+      "meanGeometryComplexity": 17.56
+    },
+    {
+      "from": 4001,
+      "to": 4100,
+      "meanTiles": 132.4,
+      "meanGeometryComplexity": 19.97
+    },
+    {
+      "from": 4101,
+      "to": 4200,
+      "meanTiles": 130.58,
+      "meanGeometryComplexity": 18.45
+    },
+    {
+      "from": 4201,
+      "to": 4300,
+      "meanTiles": 128.5,
+      "meanGeometryComplexity": 18.88
+    },
+    {
+      "from": 4301,
+      "to": 4400,
+      "meanTiles": 129.56,
+      "meanGeometryComplexity": 18.93
+    },
+    {
+      "from": 4401,
+      "to": 4500,
+      "meanTiles": 130.14,
+      "meanGeometryComplexity": 18.26
+    },
+    {
+      "from": 4501,
+      "to": 4600,
+      "meanTiles": 131.12,
+      "meanGeometryComplexity": 18.42
+    },
+    {
+      "from": 4601,
+      "to": 4700,
+      "meanTiles": 130.32,
+      "meanGeometryComplexity": 18.7
+    },
+    {
+      "from": 4701,
+      "to": 4800,
+      "meanTiles": 127.52,
+      "meanGeometryComplexity": 18.96
+    },
+    {
+      "from": 4801,
+      "to": 4900,
+      "meanTiles": 129.14,
+      "meanGeometryComplexity": 19.05
+    },
+    {
+      "from": 4901,
+      "to": 5000,
+      "meanTiles": 129.86,
+      "meanGeometryComplexity": 18.14
+    },
+    {
+      "from": 5001,
+      "to": 5100,
+      "meanTiles": 128.34,
+      "meanGeometryComplexity": 18.35
+    },
+    {
+      "from": 5101,
+      "to": 5200,
+      "meanTiles": 129.4,
+      "meanGeometryComplexity": 19.17
+    }
+  ],
+  "contentSha256": "46f614baffd69bf13f24420f2848c09f670ac95a1f69dc8c0ac9792fb22a6f6d"
+}

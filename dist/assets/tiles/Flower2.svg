@@ -1,0 +1,14 @@
+<svg id="Flower2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid meet">
+  <g transform="translate(150,200)">
+    <circle r="100" fill="none" stroke="#7b1fa2" stroke-width="8"/>
+    <g fill="#7b1fa2">
+      <circle cx="0" cy="-62" r="28"/>
+      <circle cx="60" cy="-18" r="28"/>
+      <circle cx="37" cy="52" r="28"/>
+      <circle cx="-37" cy="52" r="28"/>
+      <circle cx="-60" cy="-18" r="28"/>
+      <circle cx="0" cy="0" r="18" fill="#f4b400"/>
+    </g>
+    <text x="0" y="148" text-anchor="middle" font-family="Georgia, serif" font-size="64" font-weight="bold" fill="#7b1fa2">2</text>
+  </g>
+</svg>

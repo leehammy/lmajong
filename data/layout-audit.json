@@ -1,0 +1,144 @@
+{
+  "candidateCount": 395,
+  "uniquePlayableLayouts": 296,
+  "duplicateCandidates": 65,
+  "rejected": [
+    {
+      "id": "mah-3833444126",
+      "reason": "unsupported upper tile"
+    },
+    {
+      "id": "kde-alien",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-castle",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-castle2",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-cat",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-crab",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-cross",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-default",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-dragon",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-girl",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-hole",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-mask",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-maze",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-pyramid",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-spider",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-stax",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-theatre",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-tower",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-triangle",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "kde-up&down",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "pysol-5008",
+      "reason": "unsupported upper tile"
+    },
+    {
+      "id": "pysol-5212",
+      "reason": "unsupported upper tile"
+    },
+    {
+      "id": "pysol-5241",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "pysol-5276",
+      "reason": "unsupported upper tile"
+    },
+    {
+      "id": "pysol-5801",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "pysol-5803",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "pysol-5805",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "pysol-5806",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "pysol-5807",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "pysol-5808",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "pysol-5809",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "pysol-5810",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "pysol-5620",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "pysol-5621",
+      "reason": "tile-count or coordinate bounds"
+    }
+  ],
+  "licensePolicy": "Mahseum archive excluded: its MIT license explicitly excludes layouts. Green artwork excluded (CC-BY-NC). Only layout geometry imported; one myMahjong engine."
+}
