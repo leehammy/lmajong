@@ -2,7 +2,7 @@
   "format": 1,
   "appId": "ls-majong",
   "version": "1.0.0",
-  "buildId": "1.0.0-38df742cae7e5c21",
+  "buildId": "1.0.0-661863b67c62a868",
   "core": [
     {
       "path": "/assets/garden-portrait.svg",
@@ -271,7 +271,7 @@
     },
     {
       "path": "/build-info.json",
-      "sha256": "2e48f9aa5040b91a53589f2538100217d1091055981f12df4a5fb6497a6cabbd",
+      "sha256": "5fb2e59f721102d64de1b50978a3185ba59258005b7066ad4553e6b4c8ccd06f",
       "bytes": 87
     },
     {
@@ -321,8 +321,8 @@
     },
     {
       "path": "/",
-      "sha256": "8ffcd2dbd7923de96f98970b3089e6d956e7c50813231daf080c555669a306de",
-      "bytes": 2952
+      "sha256": "2eb828a3a88c65a1b22b323e137b8ab68fd5cca6addf5cda6152f3c2ba9e0f09",
+      "bytes": 2996
     },
     {
       "path": "/manifest.webmanifest",
@@ -331,8 +331,8 @@
     },
     {
       "path": "/src/app.js",
-      "sha256": "2870f97191a13f81ef0cf14dbd39ecae3d1e0660d0023dfacc512b9019534321",
-      "bytes": 26296
+      "sha256": "390fd632ef7478aba15cd8523cc9aea51a3bdead0bd601790cf4896869ec445f",
+      "bytes": 26848
     },
     {
       "path": "/src/engine.js",
@@ -356,8 +356,8 @@
     },
     {
       "path": "/styles/game.css",
-      "sha256": "c1c6fa5c0d3c54523e6beb7f70d2d411be6cd41d48cacc5e426071f15e798bac",
-      "bytes": 12736
+      "sha256": "17dc251811949c25428c5ff3575c93eeb4723c1a9e94e0d8e105e0f4efb249c7",
+      "bytes": 13329
     }
   ],
   "media": []

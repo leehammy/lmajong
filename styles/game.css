@@ -4,10 +4,15 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.tile.matched{display:none}}
 .setting-row{min-height:57px}.setting-row input[type=checkbox]{min-height:28px}.setting-row:has(input){cursor:pointer}
 @media(orientation:portrait){.garden-scene{background-image:url('../assets/garden-portrait.svg')}}
-/* iOS 26+ draws a blur under the status bar of Home Screen apps; keep the top bar clear of it. */
-@supports(-webkit-touch-callout:none){@media(display-mode:standalone){#app{padding-top:calc(env(safe-area-inset-top,0px) + 14px)}}}
+/* iOS 26+ blurs the top of Home Screen apps unless WebKit finds an opaque fixed element on the top edge.
+   #ios-edge is that element, painted black to continue the opaque status bar; the top bar sits below it. */
+#ios-edge{display:none}
+@supports(-webkit-touch-callout:none){@media(display-mode:standalone){#ios-edge{display:block}#app{padding-top:calc(env(safe-area-inset-top,0px) + 14px)}}}
+.ios-standalone #ios-edge{display:block}.ios-standalone #app{padding-top:calc(env(safe-area-inset-top,0px) + 14px)}
+#ios-edge{position:fixed;top:0;left:0;right:0;height:max(env(safe-area-inset-top,0px),10px);background:#000;z-index:2147483000;pointer-events:none}
 .audio-row>span{min-width:64px}.audio-row input[type=range]{flex:1;min-width:80px;height:44px;accent-color:#436b4d;cursor:pointer}
 .segmented{display:flex;gap:2px;padding:3px;border-radius:12px;background:#e3e6d5}.segmented button{min-height:44px;padding:6px 12px;border-radius:9px;background:transparent;color:#435e3e;font-size:14px}.segmented button.active{background:#385d46;color:#fffdf0}
-.tile .idx{position:absolute;left:4px;top:3px;font:800 13px/1 ui-rounded,system-ui,sans-serif;color:#2c4f8f;pointer-events:none}.tile .idx.char{color:#b2343a}.tile .idx.bamboo{color:#2f6b3a}.tile .idx.wind{color:#22302a}.tile:has(.idx) img{width:84%;height:84%;margin:14% auto 0}
+.tile .idx{position:absolute;left:4px;top:3px;font:800 13px/1 ui-rounded,system-ui,sans-serif;color:#2c4f8f;pointer-events:none}.tile .idx.char{color:#b2343a}.tile .idx.bamboo{color:#2f6b3a}.tile .idx.wind{color:#22302a}.tile:has(.idx) img{width:74%;height:74%;margin:20% auto 0}
 .tile .picture{display:grid;place-items:center;height:100%;font:40px/1 "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;pointer-events:none}
 @media(max-width:420px){.audio-row>span{min-width:56px}.segmented button{padding:6px 8px;font-size:13px}}
+@media(orientation:landscape) and (max-height:500px){#ios-edge{display:none!important}.ios-standalone #app,#app{padding-top:env(safe-area-inset-top,0px)!important}}
