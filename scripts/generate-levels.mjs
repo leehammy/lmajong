@@ -8,22 +8,36 @@ const layouts = JSON.parse(fs.readFileSync(path.join(root,'data/layouts.json'),'
 const COUNT = 5200;
 const levels=[], seen=new Set();
 let lastLayout='', cycles=new Map();
+const fit=(min,max,minLayers,maxLayers,from=layouts)=>from.filter(l=>l.tileCount>=min&&l.tileCount<=max&&l.layers>=minLayers&&l.layers<=maxLayers);
+// Full donor boards; the derived "Little" crops and crafted shapes serve the opening and the breathers.
+const classic=layouts.filter(l=>!l.id.includes('-little-')&&!l.id.startsWith('garden-'));
+const BANDS=[
+  {from:2,to:5,pool:fit(30,44,2,3)},{from:6,to:15,pool:fit(36,60,2,4)},{from:16,to:30,pool:fit(48,76,2,4)},
+  {from:31,to:60,pool:fit(60,96,3,5)},{from:61,to:100,pool:fit(76,120,3,6)},{from:101,to:150,pool:fit(96,144,2,9,classic)}];
+// One board per level from evenly spaced complexity buckets, chosen within the bucket by seed.
+function bandPick(band,id) {
+  if(!band.picks) {
+    const sorted=[...band.pool].sort((a,b)=>a.complexity-b.complexity||a.id.localeCompare(b.id)),count=band.to-band.from+1,random=seededRandom(band.from*7919);
+    band.picks=Array.from({length:count},(_,i)=>{const lo=Math.floor(i*sorted.length/count),hi=Math.max(lo+1,Math.floor((i+1)*sorted.length/count));return sorted[lo+Math.floor(random()*(hi-lo))];});
+  }
+  return band.picks[id-band.from];
+}
 for(let id=1;id<=COUNT;id++) {
-  // Introductory chapters increase tile count and stack depth gradually. Thereafter
-  // cycle the complete library, interspersing smaller, relaxing garden boards.
-  let pool;
-  if(id<=10) pool=layouts.filter(l=>l.id.startsWith('intro-')&&l.tileCount<=40);
-  else if(id<=30) pool=layouts.filter(l=>l.id.startsWith('intro-')&&l.tileCount<=60);
-  else if(id<=60) pool=layouts.filter(l=>l.tileCount<=84&&l.layers<=3);
-  else if(id<=120) pool=layouts.filter(l=>l.tileCount<=120&&l.layers<=4);
-  else if(id<=240) pool=layouts.filter(l=>l.complexity<=24);
-  else if(id%10===0) pool=layouts.filter(l=>l.tileCount<=84&&l.layers<=3);
-  else pool=layouts;
-  const poolKey=pool.map(l=>l.id).join(',');
-  let cycle=cycles.get(poolKey);
-  if(!cycle?.length) { cycle=shuffleArray([...pool],seededRandom(Math.imul(id,2654435761))); cycles.set(poolKey,cycle); }
-  let layout=id===1?layouts.find(l=>l.id==='intro-1'):cycle.pop();
-  if(layout.id===lastLayout&&cycle.length) {cycle.unshift(layout); layout=cycle.pop();}
+  // The opening Journey climbs through size bands; within each band boards are taken in order of
+  // complexity so every level is a little bigger or deeper than the last. From level 151 the whole
+  // library cycles, with a smaller layered breather every sixth level.
+  let layout;
+  const band=BANDS.find(b=>id>=b.from&&id<=b.to);
+  if(id===1) layout=layouts.find(l=>l.id==='intro-1');
+  else if(band) layout=bandPick(band,id);
+  else {
+    const pool=id%6===0?fit(40,80,2,9):fit(84,144,1,9,classic);
+    const poolKey=pool.map(l=>l.id).join(',');
+    let cycle=cycles.get(poolKey);
+    if(!cycle?.length) { cycle=shuffleArray([...pool],seededRandom(Math.imul(id,2654435761))); cycles.set(poolKey,cycle); }
+    layout=cycle.pop();
+    if(layout.id===lastLayout&&cycle.length) {cycle.unshift(layout); layout=cycle.pop();}
+  }
   lastLayout=layout.id;
   const difficulty=layout.tileCount<=60&&layout.layers<=2?1:layout.complexity<=21?2:3;
   let seed=(0x4c534d4a+Math.imul(id,0x9e3779b1))>>>0,deal,key;

@@ -45,10 +45,9 @@ for(const [index,level] of content.levels.entries()) {
   assert(remaining(game.tiles)===0,'Board did not clear');
   const board=sha(canonical(layout.positions,level.faces));assert(!boards.has(board),'Duplicate deal up to planar transforms');boards.add(board);
   assert(level.boardHash===sha(layout.geometryHash+':'+level.faces.join(',')),'Content hash mismatch');
-  if(level.id<=10) assert(layout.tileCount<=40&&layout.layers===1,'Opening curve too complex');
-  if(level.id<=30) assert(layout.tileCount<=60,'Introductory tile cap exceeded');
-  if(level.id<=60) assert(layout.tileCount<=84&&layout.layers<=3);
-  if(level.id<=120) assert(layout.tileCount<=120&&layout.layers<=4);
+  if(level.id===1) assert(layout.layers===1,'Level 1 is a flat introduction');
+  for(const [to,max] of [[5,44],[15,60],[30,76],[60,96],[100,120]]) if(level.id<=to) assert(layout.tileCount<=max,'Opening curve too large at level '+level.id);
+  if(level.id>1&&level.id<=150) assert(layout.layers>=2,'Opening levels after the first must be layered');
   const c=Math.floor(index/100);chapters[c]??={from:index+1,to:0,count:0,tiles:0,complexity:0};
   chapters[c].to=level.id;chapters[c].count++;chapters[c].tiles+=layout.tileCount;chapters[c].complexity+=layout.complexity;
   // Reproduction sample is deliberately spread throughout the entire Journey.

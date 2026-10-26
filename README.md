@@ -38,8 +38,9 @@ The project has not been deployed to your account. Deployment protection/login p
 ## Included content
 
 - **5,200 generated and validated unique prebuilt Journey deals**, all bundled offline.
-- **296 distinct playable board geometries**, deduplicated across translations, rotations and reflections. Actual sources and exclusions are in `docs/SOURCES.md`.
-- A gentle opening: first 10 levels use 24–40 tiles, first 30 at most 60 tiles, first 60 at most 84 tiles, first 120 at most 120 tiles; later levels rotate through the larger library. Difficulty is a geometry/symbol-variety heuristic, not a measured human solve-time rating.
+- **1,248 distinct playable board geometries** (811 used by the Journey), deduplicated across translations, rotations and reflections: the donor layouts plus smaller layered boards derived from them ("Little" centre crops and crafted shapes). Actual sources and exclusions are in `docs/SOURCES.md`.
+- A steady climb: Level 1 is a flat 24-tile board; every later level is layered. Levels 2–5 use 30–44 tiles, 6–15 up to 60, 16–30 up to 76, 31–60 up to 96 with 3–5 layers, 61–100 up to 120, and 101–150 the full classic layouts in rising complexity. From Level 151 the whole classic library cycles with a smaller layered breather every sixth level. Difficulty is a geometry heuristic, not a measured human solve-time rating.
+- **Daily puzzle**: one random board per day (the same all day), kept separately from the Journey board, worth 25 coins with a day streak.
 - Every initial deal has a winning witness. Both the original rules and the gameplay API replay every witness during validation; this guarantees a winning route exists, not that every legal choice wins.
 - After Level 5,200, deterministic local generation continues from the bundled library without a download. These future boards are proved as they are created; no claim of advance validation or global uniqueness is made for the endless extension.
 - Twenty-five coins per first completion. Replaying cannot mint repeated rewards. Coins unlock optional garden light, felt or tile colours only. The garden light variants use one original garden illustration with different colour treatments; they are not separate photographic scenes.

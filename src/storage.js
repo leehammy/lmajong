@@ -20,6 +20,55 @@ const name = v => typeof v === 'string' && /^[a-zA-Z0-9_-]{1,80}$/.test(v);
 const plain = v => v && typeof v === 'object' && !Array.isArray(v) && Object.getPrototypeOf(v) === Object.prototype;
 const coordinate = v => typeof v === 'number' && Number.isFinite(v) && Math.abs(v) <= 100000;
 
+/** A saved board: shape, faces, undo history and witness must all be consistent. Daily boards use id 0. */
+function validGame(g, id, finished) {
+  if (!plain(g) || g.level !== id || g.levelId !== id || !name(g.layoutId)
+    || !integer(g.seed, 0, 4294967295) || !integer(g.difficulty, 1, 10)
+    || !Array.isArray(g.tiles) || g.tiles.length < 2 || g.tiles.length > 4096 || g.tiles.length % 2
+    || !Array.isArray(g.history) || g.history.length > g.tiles.length / 2 || !integer(g.shuffleCount)
+    || typeof g.completed !== 'boolean' || !Array.isArray(g.solution) || g.solution.length > g.tiles.length / 2) return false;
+  const suitValues = { bamboo: 9, char: 9, dot: 9, wind: 4, dragon: 3, flower: 4, season: 4 };
+  for (let i = 0; i < g.tiles.length; i++) {
+    const t = g.tiles[i];
+    if (!plain(t) || t.id !== i || ![t.x, t.y, t.z].every(coordinate)
+      || !Object.hasOwn(suitValues, t.suit) || !integer(t.val, 1, suitValues[t.suit])
+      || typeof t.active !== 'boolean') return false;
+  }
+  const used = new Set();
+  for (const pair of g.history) {
+    if (!Array.isArray(pair) || pair.length !== 2 || pair[0] === pair[1]) return false;
+    for (const id of pair) {
+      if (!integer(id, 0, g.tiles.length - 1) || used.has(id) || g.tiles[id].active) return false;
+      used.add(id);
+    }
+    const [a, b] = pair.map(id => g.tiles[id]);
+    if (a.suit !== b.suit || (!['flower', 'season'].includes(a.suit) && a.val !== b.val)) return false;
+  }
+  // A reshuffle discards old undo history, so only this segment is replayed.
+  const replay = g.tiles.map(tile => ({ ...tile, active: tile.active || used.has(tile.id) }));
+  for (const [a, b] of g.history) {
+    if (!isFree(replay[a], replay) || !isFree(replay[b], replay) || !isMatch(replay[a], replay[b])) return false;
+    replay[a].active = replay[b].active = false;
+  }
+  const groups = new Map();
+  for (const tile of g.tiles) if (tile.active) {
+    const group = ['flower', 'season'].includes(tile.suit) ? tile.suit : tile.suit + ':' + tile.val;
+    groups.set(group, (groups.get(group) || 0) + 1);
+  }
+  if ([...groups.values()].some(count => count % 2)) return false;
+  const solutionIds = new Set();
+  for (const pair of g.solution) {
+    if (!Array.isArray(pair) || pair.length !== 2 || pair[0] === pair[1]) return false;
+    for (const id of pair) {
+      if (!integer(id, 0, g.tiles.length - 1) || solutionIds.has(id)) return false;
+      solutionIds.add(id);
+    }
+  }
+  const remaining = g.tiles.filter(t => t.active).length;
+  if (remaining % 2 || g.completed !== (remaining === 0) || (g.completed && !finished)) return false;
+  return true;
+}
+
 /** Reject unsupported/corrupt saves before they touch live progress. */
 export function validateSave(save) {
   if (!plain(save) || save.schema !== 1 || !integer(save.level, 1) || !integer(save.unlocked, 1)
@@ -33,53 +82,15 @@ export function validateSave(save) {
     || ('music' in s && typeof s.music !== 'boolean')
     || !['musicVolume', 'soundVolume'].every(k => !(k in s) || integer(s[k], 0, 100))
     || ('faces' in s && !['classic', 'numbered', 'pictures'].includes(s.faces))) return false;
-  if (save.game !== null) {
-    const g = save.game;
-    if (!plain(g) || g.level !== save.level || g.levelId !== save.level || !name(g.layoutId)
-      || !integer(g.seed, 0, 4294967295) || !integer(g.difficulty, 1, 10)
-      || !Array.isArray(g.tiles) || g.tiles.length < 2 || g.tiles.length > 4096 || g.tiles.length % 2
-      || !Array.isArray(g.history) || g.history.length > g.tiles.length / 2 || !integer(g.shuffleCount)
-      || typeof g.completed !== 'boolean' || !Array.isArray(g.solution) || g.solution.length > g.tiles.length / 2) return false;
-    const suitValues = { bamboo: 9, char: 9, dot: 9, wind: 4, dragon: 3, flower: 4, season: 4 };
-    for (let i = 0; i < g.tiles.length; i++) {
-      const t = g.tiles[i];
-      if (!plain(t) || t.id !== i || ![t.x, t.y, t.z].every(coordinate)
-        || !Object.hasOwn(suitValues, t.suit) || !integer(t.val, 1, suitValues[t.suit])
-        || typeof t.active !== 'boolean') return false;
-    }
-    const used = new Set();
-    for (const pair of g.history) {
-      if (!Array.isArray(pair) || pair.length !== 2 || pair[0] === pair[1]) return false;
-      for (const id of pair) {
-        if (!integer(id, 0, g.tiles.length - 1) || used.has(id) || g.tiles[id].active) return false;
-        used.add(id);
-      }
-      const [a, b] = pair.map(id => g.tiles[id]);
-      if (a.suit !== b.suit || (!['flower', 'season'].includes(a.suit) && a.val !== b.val)) return false;
-    }
-    // A reshuffle discards old undo history, so only this segment is replayed.
-    const replay = g.tiles.map(tile => ({ ...tile, active: tile.active || used.has(tile.id) }));
-    for (const [a, b] of g.history) {
-      if (!isFree(replay[a], replay) || !isFree(replay[b], replay) || !isMatch(replay[a], replay[b])) return false;
-      replay[a].active = replay[b].active = false;
-    }
-    const groups = new Map();
-    for (const tile of g.tiles) if (tile.active) {
-      const group = ['flower', 'season'].includes(tile.suit) ? tile.suit : tile.suit + ':' + tile.val;
-      groups.set(group, (groups.get(group) || 0) + 1);
-    }
-    if ([...groups.values()].some(count => count % 2)) return false;
-    const solutionIds = new Set();
-    for (const pair of g.solution) {
-      if (!Array.isArray(pair) || pair.length !== 2 || pair[0] === pair[1]) return false;
-      for (const id of pair) {
-        if (!integer(id, 0, g.tiles.length - 1) || solutionIds.has(id)) return false;
-        solutionIds.add(id);
-      }
-    }
-    const remaining = g.tiles.filter(t => t.active).length;
-    if (remaining % 2 || g.completed !== (remaining === 0) || (g.completed && !save.completed.includes(save.level))) return false;
+  if (save.game !== null && !validGame(save.game, save.level, save.completed.includes(save.level))) return false;
+  // Optional since 1.1: the daily puzzle slot and which board is open.
+  if ('mode' in save && !['journey', 'daily'].includes(save.mode)) return false;
+  if ('daily' in save) {
+    const d = save.daily, date = v => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v);
+    if (!plain(d) || !date(d.date) || typeof d.done !== 'boolean' || !integer(d.streak, 0, 100000)
+      || !(d.last === null || date(d.last)) || !(d.game === null || validGame(d.game, 0, d.done))) return false;
   }
+  if (save.mode === 'daily' && !save.daily?.game) return false;
   try { if (JSON.stringify(save).length > MAX_BACKUP) return false; } catch { return false; }
   return true;
 }

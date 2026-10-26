@@ -97,3 +97,18 @@ test('undo history is replayed through actual free-tile rules, not just valid ID
   assert.equal(validateSave(save),true,'top pair can be removed to expose lower tiles');
   save.game.history=[];assert.equal(validateSave(save),true,'reshuffle may legitimately clear undo history');
 });
+test('daily puzzle slot is optional, validated and survives backup', () => {
+  storage();
+  const daily = { ...playable().game, level: 0, levelId: 0 };
+  const save = { ...playable(), mode: 'daily', daily: { date: '2026-10-26', game: daily, done: false, streak: 3, last: '2026-10-25' } };
+  assert.equal(validateSave(playable()), true);
+  assert.equal(validateSave(save), true);
+  assert.deepEqual(importBackup(exportBackup(save)), save);
+  for (const bad of [
+    { ...save, mode: 'arcade' },
+    { ...save, daily: { ...save.daily, date: '26/10/2026' } },
+    { ...save, daily: { ...save.daily, game: { ...daily, levelId: 1 } } },
+    { ...save, daily: { ...save.daily, game: { ...daily, completed: true, tiles: daily.tiles.map(t => ({ ...t, active: false })) } } },
+    { ...save, daily: { ...save.daily, game: null } }
+  ]) assert.equal(validateSave(bad), false);
+});

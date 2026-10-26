@@ -1,7 +1,7 @@
 {
-  "candidateCount": 395,
-  "uniquePlayableLayouts": 296,
-  "duplicateCandidates": 65,
+  "candidateCount": 1648,
+  "uniquePlayableLayouts": 1248,
+  "duplicateCandidates": 341,
   "rejected": [
     {
       "id": "mah-3833444126",
@@ -137,6 +137,106 @@
     },
     {
       "id": "pysol-5621",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-stone-pyramid-12x7-3",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-stone-pyramid-12x7-5",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-lotus-diamond-11x11-3",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-lotus-diamond-11x11-5",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-lotus-diamond-13x9-5",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-moon-pool-11x8-3",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-moon-pool-11x8-5",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-moon-pool-12x8-3",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-moon-pool-12x8-5",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-moon-pool-13x9-2",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-moon-pool-13x9-3",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-moon-pool-13x9-5",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-lantern-cross-11x9-5",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-lantern-cross-11x11-3",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-lantern-cross-11x11-5",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-twin-pagodas-15x7-2",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-twin-pagodas-15x7-3",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-twin-pagodas-15x7-5",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-blossom-9x9-5",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-blossom-11x9-2",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-blossom-11x9-3",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-blossom-11x9-5",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-blossom-11x11-2",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-blossom-11x11-3",
+      "reason": "tile-count or coordinate bounds"
+    },
+    {
+      "id": "garden-blossom-11x11-5",
       "reason": "tile-count or coordinate bounds"
     }
   ],

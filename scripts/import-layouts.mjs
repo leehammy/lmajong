@@ -58,6 +58,65 @@ for(const file of fs.readdirSync(path.join(vendor,'green-mahjong')).filter(f=>f.
   const context={matchingGame:{}}; vm.runInNewContext(read(path.join(vendor,'green-mahjong',file)),context);
   for(const [name,b] of Object.entries(context.matchingGame)) if(b.positionX&&b.positionY&&b.shift) add('green-'+name,name.replace(/([A-Z])/g,' $1'),b.positionX.map((x,i)=>({x:x*2,y:b.positionY[i]*2,z:b.shift[i]})),'green-mahjong/'+file,'GPL-3.0-only','Daniel Beck');
 }
+// The donor libraries are almost entirely 144-tile boards, which left the opening Journey cycling a
+// handful of flat grids. Two families of smaller layered boards fill the curve:
+// 1. Crafted shapes: a footprint mask stacked into a pyramid, each layer keeping the cells whose four
+//    neighbours exist below it.
+// 2. "Little" boards: the centre of each large donor layout, cropped to a window, keeping its own layers.
+const key2=(x,y)=>x+','+y;
+function stack(mask,maxLayers) {
+  const positions=[];let layer=new Set(mask.map(([x,y])=>key2(x,y)));
+  for(let z=0;z<maxLayers&&layer.size;z++) {
+    for(const k of layer){const [x,y]=k.split(',').map(Number);positions.push({x:x*2,y:y*2,z});}
+    layer=new Set([...layer].filter(k=>{const [x,y]=k.split(',').map(Number);return [[1,0],[-1,0],[0,1],[0,-1]].every(([dx,dy])=>layer.has(key2(x+dx,y+dy)));}));
+  }
+  return positions;
+}
+// Odd boards lose their highest tile nearest the edge, which can never unsupport another tile.
+function evenOut(positions) {
+  if(positions.length%2===0) return positions;
+  const cx=Math.max(...positions.map(p=>p.x))/2,cy=Math.max(...positions.map(p=>p.y))/2;
+  const top=positions.filter(p=>!positions.some(q=>q.z===p.z+1&&Math.abs(p.x-q.x)<2&&Math.abs(p.y-q.y)<2));
+  top.sort((a,b)=>b.z-a.z||(Math.abs(b.x-cx)+Math.abs(b.y-cy))-(Math.abs(a.x-cx)+Math.abs(a.y-cy))||a.y-b.y||a.x-b.x);
+  return positions.filter(p=>p!==top[0]);
+}
+// Crops must stay one solid shape: tiles join through a shared edge or by stacking, and the base fills its outline.
+function solid(positions) {
+  const touch=(a,b)=>a.z===b.z?(Math.abs(a.x-b.x)===2&&Math.abs(a.y-b.y)<2)||(Math.abs(a.y-b.y)===2&&Math.abs(a.x-b.x)<2):Math.abs(a.x-b.x)<2&&Math.abs(a.y-b.y)<2;
+  const seenTiles=new Set([0]),queue=[0];
+  while(queue.length){const a=positions[queue.pop()];positions.forEach((b,j)=>{if(!seenTiles.has(j)&&touch(a,b)){seenTiles.add(j);queue.push(j);}});}
+  const base=positions.filter(t=>t.z===0),w=Math.max(...base.map(t=>t.x))-Math.min(...base.map(t=>t.x))+2,h=Math.max(...base.map(t=>t.y))-Math.min(...base.map(t=>t.y))+2;
+  return seenTiles.size===positions.length&&base.length*4/(w*h)>=.4;
+}
+const range=(a,b)=>Array.from({length:b-a+1},(_,i)=>a+i);
+const grid=(w,h,keep)=>range(0,h-1).flatMap(y=>range(0,w-1).filter(x=>keep(x-(w-1)/2,y-(h-1)/2)).map(x=>[x,y]));
+const shapes=[
+  ['Stone Pyramid',[[6,4],[7,5],[8,5],[8,6],[9,6],[10,6],[10,7],[12,7]],(w,h)=>grid(w,h,()=>true)],
+  ['Lotus Diamond',[[7,7],[9,7],[9,9],[11,9],[11,11],[13,9]],(w,h)=>grid(w,h,(x,y)=>Math.abs(x)/((w+1)/2)+Math.abs(y)/((h+1)/2)<=1)],
+  ['Moon Pool',[[7,6],[8,6],[9,7],[10,7],[11,8],[12,8],[13,9]],(w,h)=>grid(w,h,(x,y)=>(x/((w+.6)/2))**2+(y/((h+.6)/2))**2<=1)],
+  ['Lantern Cross',[[7,7],[9,7],[9,9],[11,9],[11,11]],(w,h)=>grid(w,h,(x,y)=>Math.abs(x)<=w/6+.5||Math.abs(y)<=h/6+.5)],
+  ['Butterfly',[[9,5],[11,6],[11,7],[13,7],[13,9]],(w,h)=>grid(w,h,(x,y)=>Math.abs(y)<=Math.abs(x)*h/w+1)],
+  ['Twin Pagodas',[[9,5],[11,5],[11,6],[13,6],[13,7],[15,7]],(w,h)=>grid(w,h,x=>Math.abs(x)>=1)],
+  ['Koi Steps',[[7,5],[8,6],[9,6],[10,7],[11,7]],(w,h)=>grid(w,h,(x,y)=>x+(w-1)/2>=y+(h-1)/2-1)],
+  ['Garden Ring',[[8,6],[9,7],[10,7],[11,8],[12,8]],(w,h)=>grid(w,h,(x,y)=>Math.abs(x)>=(w-1)/2-2.5||Math.abs(y)>=(h-1)/2-2.5)],
+  ['Blossom',[[9,7],[9,9],[11,9],[11,11]],(w,h)=>grid(w,h,(x,y)=>Math.hypot(x,y)<=w/2&&(Math.abs(x)<=1.5||Math.abs(y)<=1.5||Math.hypot(Math.abs(x)-w/4,Math.abs(y)-h/4)<=w/4.2))],
+];
+const roman=['','I','II','III','IV','V','VI','VII','VIII','IX','X'];
+for(const [name,sizes,mask] of shapes) sizes.forEach(([w,h],i)=>{for(const layers of [2,3,5]){
+  const positions=evenOut(stack(mask(w,h),layers));
+  add(`garden-${name.toLowerCase().replace(/\s+/g,'-')}-${w}x${h}-${layers}`,`${name} ${roman[i+1]}`,positions,'L’s Majong crafted shapes (scripts/import-layouts.mjs)','GPL-3.0-only','L’s Majong contributors');
+}});
+for(const c of [...candidates]) {
+  const p=normalize(c.positions);if(p.length<100||c.id.startsWith('garden-')) continue;
+  const cx=(Math.max(...p.map(t=>t.x))+2)/2,cy=(Math.max(...p.map(t=>t.y))+2)/2;let n=0;
+  for(const [fx,fy] of [[.5,1],[.62,.72],[.45,.6],[1,.5],[.75,.85],[.35,1]]) {
+    let crop=p.filter(t=>Math.abs(t.x+1-cx)<=cx*fx&&Math.abs(t.y+1-cy)<=cy*fy);
+    for(let changed=true;changed;){const before=crop.length;crop=crop.filter(a=>a.z===0||crop.some(b=>b.z===a.z-1&&Math.abs(a.x-b.x)<2&&Math.abs(a.y-b.y)<2));changed=crop.length!==before;}
+    crop=evenOut(crop);
+    if(crop.length<30||crop.length>110||Math.max(...crop.map(t=>t.z))<1||!solid(crop)) continue;
+    n++;add(`${c.id}-little-${n}`,`Little ${c.name}${n>1?' '+roman[n]:''}`,crop,`${c.source} (centre crop)`,c.license,c.author);
+  }
+}
 const seen=new Map(), layouts=[], rejected=[];
 for(const c of candidates) {
   let p=normalize(c.positions);
