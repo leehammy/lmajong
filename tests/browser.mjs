@@ -9,7 +9,7 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE?pathToFileURL(proces
 const artifacts=path.resolve(process.env.QA_ARTIFACTS||path.join(project,'test-results','browser'));
 await fs.mkdir(artifacts,{recursive:true});
 const baseRoot=path.join(project,'dist');
-const mime={'.html':'text/html; charset=utf-8','.js':'application/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.webmanifest':'application/manifest+json','.svg':'image/svg+xml','.png':'image/png','.ico':'image/x-icon','.m4a':'audio/mp4'};
+const mime={'.html':'text/html; charset=utf-8','.js':'application/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.webmanifest':'application/manifest+json','.svg':'image/svg+xml','.png':'image/png','.ico':'image/x-icon','.m4a':'audio/mp4','.mp3':'audio/mpeg'};
 async function readTree(dir,prefix='') {const out=new Map();for(const ent of await fs.readdir(dir,{withFileTypes:true})){if(ent.isDirectory())for(const [key,value]of await readTree(path.join(dir,ent.name),prefix+'/'+ent.name))out.set(key,value);else out.set(prefix+'/'+ent.name,await fs.readFile(path.join(dir,ent.name)));}return out;}
 const base=await readTree(baseRoot);base.set('/',base.get('/index.html'));base.delete('/index.html');
 const baseBuild=JSON.parse(base.get('/build-info.json')).buildId;

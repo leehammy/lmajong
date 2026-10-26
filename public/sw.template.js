@@ -54,6 +54,17 @@ function mimeOkay(file, response) {
   if (/\.(m4a|ogg|mp3)$/.test(file.path)) return type.startsWith('audio/');
   return true;
 }
+// Safari loads media in byte ranges and will not play a whole-file reply to a Range request.
+async function ranged(request, response) {
+  const range = /^bytes=(\d*)-(\d*)$/.exec(request.headers?.get('range') || '');
+  if (!range || (range[1] === '' && range[2] === '')) return response;
+  const body = await response.arrayBuffer(), size = body.byteLength;
+  const start = range[1] === '' ? Math.max(0, size - Number(range[2])) : Number(range[1]);
+  const end = range[1] === '' || range[2] === '' ? size - 1 : Math.min(size - 1, Number(range[2]));
+  if (start > end) return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${size}` } });
+  return new Response(body.slice(start, end + 1), { status: 206, headers: { 'Content-Type': response.headers.get('content-type') || 'application/octet-stream',
+    'Content-Range': `bytes ${start}-${end}/${size}`, 'Content-Length': String(end - start + 1), 'Accept-Ranges': 'bytes' } });
+}
 async function verified(file) {
   return network(file.path, 20000, async response => {
     if (!mimeOkay(file, response) || await hash(response) !== file.sha256) throw Error(`Incomplete or corrupt release: ${file.path}`);
@@ -142,12 +153,12 @@ self.addEventListener('fetch', event => {
     if (request.mode !== 'navigate' && event.clientId) buildId = await askClientBuild(await self.clients.get(event.clientId));
     let cache = await caches.open(PREFIX + buildId);
     let response = await cache.match(path);
-    if (response?.ok) return response;
+    if (response?.ok) return ranged(request, response);
     // A missing old asset can only be repaired from the current release when its hash agrees.
     let oldManifest = buildId === BUILD_ID ? manifest : await cache.match('/offline-manifest.json').then(r => r?.json()).catch(() => null);
     const file = oldManifest?.core?.find(item => item.path === path);
     if (!file) return network(request.url).catch(unavailable);
-    try { response = await verified(file); await cache.put(path, response.clone()); return response; }
+    try { response = await verified(file); await cache.put(path, response.clone()); return ranged(request, response); }
     catch { return unavailable(); }
   })());
 });

@@ -13,7 +13,7 @@ let recoveryPromise;
 export function defaultSave() {
   return { schema: 1, level: 1, unlocked: 1, coins: 0, completed: [],
     owned: ['mist', 'ivory', 'sage'], settings: { background: 'mist', tile: 'ivory', board: 'sage',
-      sound: false, showFree: true, reduceMotion: false }, game: null };
+      sound: true, showFree: true, reduceMotion: false, music: true, musicVolume: 50, soundVolume: 80, faces: 'numbered' }, game: null };
 }
 const integer = (v, min = 0, max = 10000000) => Number.isSafeInteger(v) && v >= min && v <= max;
 const name = v => typeof v === 'string' && /^[a-zA-Z0-9_-]{1,80}$/.test(v);
@@ -29,7 +29,10 @@ export function validateSave(save) {
   if (!Array.isArray(save.owned) || save.owned.length > 10000 || !save.owned.every(name)) return false;
   const s = save.settings;
   if (!plain(s) || !name(s.background) || !name(s.tile) || !name(s.board)
-    || !['sound', 'showFree', 'reduceMotion'].every(k => typeof s[k] === 'boolean')) return false;
+    || !['sound', 'showFree', 'reduceMotion'].every(k => typeof s[k] === 'boolean')
+    || ('music' in s && typeof s.music !== 'boolean')
+    || !['musicVolume', 'soundVolume'].every(k => !(k in s) || integer(s[k], 0, 100))
+    || ('faces' in s && !['classic', 'numbered', 'pictures'].includes(s.faces))) return false;
   if (save.game !== null) {
     const g = save.game;
     if (!plain(g) || g.level !== save.level || g.levelId !== save.level || !name(g.layoutId)

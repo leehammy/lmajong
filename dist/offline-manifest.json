@@ -2,22 +2,52 @@
   "format": 1,
   "appId": "ls-majong",
   "version": "1.0.0",
-  "buildId": "1.0.0-421c82194862d686",
+  "buildId": "1.0.0-38df742cae7e5c21",
   "core": [
+    {
+      "path": "/assets/garden-portrait.svg",
+      "sha256": "71812dc4f7ce4a23d0437ca18cd3c73d1e8d7358bf66afd24fa8ab66482d70ef",
+      "bytes": 3686
+    },
     {
       "path": "/assets/garden.svg",
       "sha256": "130a1c90aba5682fd7abe7810cf3095743f2a3d9f03a73fb985347e791a0dc5b",
       "bytes": 2965
     },
     {
-      "path": "/assets/sounds/tile-clack.m4a",
-      "sha256": "fa8faa7af699654de4ffe4d88209bf93a076948bc13e10eb5581958a77283933",
-      "bytes": 4066
+      "path": "/assets/music/otjanbird-pt-ii.mp3",
+      "sha256": "23546f80257709ff63a59cfb4a33dc8016a24087f4c9a5470692cee3889d0049",
+      "bytes": 4701975
     },
     {
-      "path": "/assets/sounds/tile-touch.m4a",
-      "sha256": "10e7cc804f2be3efff13bb0fd38a9b5140fc128a2b9c8ee9c31039750d87ad3c",
-      "bytes": 2889
+      "path": "/assets/sounds/match-1.m4a",
+      "sha256": "e97f19bc15c0b8dc8291d2b3bd300ef127c57c78d439a1798252b3ae8f1622f8",
+      "bytes": 8621
+    },
+    {
+      "path": "/assets/sounds/match-2.m4a",
+      "sha256": "976b1d296e078abb5fa4340b2728f3ef7132096ffaad39d2dfa8b6d6261066ac",
+      "bytes": 8819
+    },
+    {
+      "path": "/assets/sounds/match-3.m4a",
+      "sha256": "f2094faab5422daf7338ca1743dc78f804f8f9b59c832c80cf30729546e10556",
+      "bytes": 9861
+    },
+    {
+      "path": "/assets/sounds/match-4.m4a",
+      "sha256": "ea00beab2d8ba625de8d6ac7b654c52056b8b3cc91b6516178649eeb741c7340",
+      "bytes": 9458
+    },
+    {
+      "path": "/assets/sounds/select.m4a",
+      "sha256": "d46b2b4edc45338397395615f76aad265392a62b7183f83812bef4c95728c44a",
+      "bytes": 3517
+    },
+    {
+      "path": "/assets/sounds/shuffle.m4a",
+      "sha256": "6a59218f360a82fd7914e77304983dae2801eeccd744b6e5ff65b0b7f0aa31f6",
+      "bytes": 42942
     },
     {
       "path": "/assets/tiles/Back.svg",
@@ -241,7 +271,7 @@
     },
     {
       "path": "/build-info.json",
-      "sha256": "30b88a98419100a4a32d85d2ad3c30e9f0fa79194e4b8e0966cfb7d6acff615e",
+      "sha256": "2e48f9aa5040b91a53589f2538100217d1091055981f12df4a5fb6497a6cabbd",
       "bytes": 87
     },
     {
@@ -291,8 +321,8 @@
     },
     {
       "path": "/",
-      "sha256": "23688fd1bf12590fd0a9bb06d8aae3e4a8a49acd1467cea5dd7bae6c6d928eb6",
-      "bytes": 2964
+      "sha256": "8ffcd2dbd7923de96f98970b3089e6d956e7c50813231daf080c555669a306de",
+      "bytes": 2952
     },
     {
       "path": "/manifest.webmanifest",
@@ -301,8 +331,8 @@
     },
     {
       "path": "/src/app.js",
-      "sha256": "97c8075e92868aa1ce43a5646f25c97d6a6dd77af7c319ba7e984a4fe4fcd5f9",
-      "bytes": 23361
+      "sha256": "2870f97191a13f81ef0cf14dbd39ecae3d1e0660d0023dfacc512b9019534321",
+      "bytes": 26296
     },
     {
       "path": "/src/engine.js",
@@ -321,13 +351,13 @@
     },
     {
       "path": "/src/storage.js",
-      "sha256": "feb937d545503db8137b00deaede76937521293cc162408493045801797a6789",
-      "bytes": 13168
+      "sha256": "a91e3b9829b165c6dc5a4b8f19a242ba41dbb813b51b6684895f98745813e26f",
+      "bytes": 13452
     },
     {
       "path": "/styles/game.css",
-      "sha256": "eb9f467a5607f3eaad152467b1d653106774cd7e289eea368a74f121f4a56e6b",
-      "bytes": 11490
+      "sha256": "c1c6fa5c0d3c54523e6beb7f70d2d411be6cd41d48cacc5e426071f15e798bac",
+      "bytes": 12736
     }
   ],
   "media": []
